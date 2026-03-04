@@ -4,7 +4,12 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-const skills = [
+interface Skill {
+  label: string;
+  level: number; // Proficiency level from 1 to 5
+}
+
+const technicalSkills: Skill[] = [
   {
     label: "React",
     level: 5,
@@ -59,7 +64,7 @@ const skills = [
   },
   {
     label: "Kubernetes",
-    level: 5,
+    level: 4,
   },
   {
     label: "CircleCI",
@@ -78,6 +83,14 @@ const skills = [
     level: 5,
   },
   {
+    label: "Supabase",
+    level: 4,
+  },
+  {
+    label: "Pocketbase",
+    level: 5,
+  },
+  {
     label: "MySQL",
     level: 3,
   },
@@ -87,6 +100,10 @@ const skills = [
   },
   {
     label: "CSS",
+    level: 5,
+  },
+  {
+    label: "Tailwind CSS",
     level: 5,
   },
   {
@@ -124,45 +141,24 @@ const skills = [
   <body>
     <Header />
     <main>
-      <h1>🧑‍🚀 Hello, Astronaut!</h1>
+      <h1>👋 Hi there!</h1>
       <p>
-        Welcome to the official <a href="https://astro.build/">Astro</a> blog starter
-        template. This template serves as a lightweight, minimally-styled starting
-        point for anyone looking to build a personal website, blog, or portfolio with
-        Astro.
+        Welcome to my personal website, blog, and portfolio built with Astro.
       </p>
-      <p>
-        This template comes with a few integrations already configured in your
-        <code>astro.config.mjs</code> file. You can customize your setup with
-        <a href="https://astro.build/integrations">Astro Integrations</a> to add tools
-        like Tailwind, React, or Vue to your project.
-      </p>
-      <p>Here are a few ideas on how to get started with the template:</p>
-      <ul>
-        <li>Edit this page in <code>src/pages/index.astro</code></li>
-        <li>
-          Edit the site header items in <code>src/components/Header.astro</code>
-        </li>
-        <li>
-          Add your name to the footer in <code>src/components/Footer.astro</code
-          >
-        </li>
-        <li>
-          Check out the included blog posts in <code>src/content/blog/</code>
-        </li>
-        <li>
-          Customize the blog post page layout in <code
-            >src/layouts/BlogPost.astro</code
-          >
-        </li>
-      </ul>
 
-      <p class="mt-12 text-xl font-bold">My skills are:</p>
-      <ul class="ml-4 grid grid-cols-3 gap-4">
+      <p class="mt-12 text-xl font-bold">Some of my technical skills are:</p>
+      <p class="text-sm italic">Highlighted skills are the most recent ones</p>
+      <ul class="ml-4 mt-8 grid grid-cols-3 gap-4">
         {
-          skills.map((skill) => (
-            <li class={skill.level >= 4 ? "bg-green-500" : ""}>
-              ↠ {skill.label}
+          technicalSkills.map((skill: Skill) => (
+            <li>
+              ↠{" "}
+              <span
+                class={`px-2 py-1 ${skill.level >= 5 ? "bg-green-200 rounded" : ""}`}
+                title={`Proficiency level: ${skill.level}/5`}
+              >
+                {skill.label}
+              </span>
             </li>
           ))
         }
