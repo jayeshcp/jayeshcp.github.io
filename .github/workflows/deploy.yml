@@ -1,35 +1,36 @@
-name: Deploy Website to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
-    branches: [main]
-    paths-ignore:
-      - README.md
-  workflow_dispatch:
+    branches: ["master"]
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-        with:
-          show-progress: false
-      - name: Install, build, and upload site
-        uses: withastro/action@v5.2.0
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["20"]
+
     permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
+
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run npm build
+        run: npm run build:prod
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
