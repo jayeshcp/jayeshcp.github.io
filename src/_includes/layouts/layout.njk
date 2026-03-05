@@ -1,0 +1,34 @@
+---
+
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="{{ settings.description }}"/>
+    <meta name="author" content="{{ settings.author }}"/>
+    <title>{{ settings.title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+  </head>
+  <body>
+    <div class="container min-w-80 mx-auto">
+      <h1 class="text-4xl font-bold mb-4">
+        <a href="/">{{ settings.title }}</a>
+      </h1>
+      <p>{{ settings.description }}</p>
+
+      <ul class="navigation">
+        {% for item in navigation %}
+          <li>
+            <a href="{{ item.url | url }}">{{ item.label }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {{ content | safe }}
+    </div>
+
+    <script src="/assets/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+body {
+  margin: 60px 60px 80px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+ul {
+  @apply list-disc leading-10 ml-5;
+}
+
+h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-2xl font-bold mb-2;
+}
+
+h3 {
+  @apply text-xl font-bold mt-4 mb-2;
+}
+
+a {
+  @apply text-orange-600 hover:underline;
+}
+
+pre {
+  @apply bg-gray-100 p-4 mb-4 rounded overflow-x-auto shadow-md border border-gray-300 text-sm;
+}
+
+p code {
+  @apply bg-gray-100 text-pink-700 italic px-1 py-1 rounded text-sm;
+}
+
+hr {
+  @apply border-t border-gray-300 my-8;
+}
+
+blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic text-gray-600 mb-4 bg-gray-100 px-4 pt-4 pb-0.5 rounded;
+}
+
+.navigation {
+  @apply list-none p-0 my-4 mx-0 flex gap-4;
+}
+
+.navigation li {
+  @apply text-nowrap;
+}
+
+.navigation a {
+  @apply text-blue-800 hover:underline px-4 py-2 bg-gray-200 rounded;
+}
+
+ul.posts {
+  @apply list-disc ml-5;
+}
