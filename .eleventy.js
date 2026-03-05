@@ -10,6 +10,7 @@ export default function (eleventyConfig) {
   });
 
   return {
+    pathPrefix: "/jayeshcp.github.io/",
     dir: {
       input: "src",
       output: "_site",
