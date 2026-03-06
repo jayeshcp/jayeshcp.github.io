@@ -13,20 +13,32 @@
   </head>
   <body>
     <div class="container min-w-80 mx-auto">
-      <h1 class="text-4xl font-bold mb-4">
-        <a href="/">{{ settings.title }}</a>
-      </h1>
-      <p>{{ settings.description }}</p>
+      <header>
+        <h1 class="text-4xl font-bold mb-4">
+          <a href="/">{{ settings.title }}</a>
+        </h1>
+        <p>{{ settings.description }}</p>
 
-      <ul class="navigation">
-        {% for item in navigation %}
-          <li>
-            <a href="{{ item.url | url }}">{{ item.label }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+        <nav>
+          <ul class="navigation">
+            {% for item in navigation %}
+              <li>
+                <a href="{{ item.url | url }}">{{ item.label }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </header>
 
-      {{ content | safe }}
+      <main class="content mb-40">
+        {{ content | safe }}
+      </main>
+
+      <footer class="text-center py-2 text-sm text-gray-600 bg-slate-50 fixed inset-x-0 bottom-0">
+        <div>&copy; {{ page.date.getFullYear() }}
+          {{ settings.author }}. All rights reserved.</div>
+        <div>Generated with Eleventy v{{ site.eleventyVersion }}.</div>
+      </footer>
     </div>
 
     <script src="/assets/js/script.js"></script>

@@ -13,6 +13,7 @@ title: Useful resources
 
 ### Misc
 
+- [Josh Comeu Blog](https://www.joshwcomeau.com/react/)
 - [AWS Cloud Practitioner Study Guide](https://tutorialsdojo.com/aws-cloud-practitioner-clf-c02-exam-guide/)
 - [Preparing for Google Cloud Certification: Cloud Engineer Professional Certificate | Coursera](https://www.coursera.org/professional-certificates/cloud-engineering-gcp?utm_medium=coursera)
 - [Good software development habits | Zarar's blog](https://zarar.dev/good-software-development-habits/)

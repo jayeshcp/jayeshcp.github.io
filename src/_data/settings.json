@@ -1,5 +1,8 @@
 {
-  "title": "11ty Blog",
+  "title": "Jayesh Chandrapal",
   "author": "Jayesh Chandrapal",
-  "description": "A blog built with Eleventy"
+  "short_author_name": "Jay",
+  "description": "Full-stack. Frontend. Backend.",
+  "github_url": "https://github.com/jayeshcp",
+  "linkedin_url": "https://www.linkedin.com/in/jayeshchandrapal/"
 }
