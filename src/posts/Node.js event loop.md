@@ -6,7 +6,8 @@ layout: layouts/blog_layout.njk
 
 ![Node.js event loop](/assets/images/event_loop.webp)
 
-What is event loop in JavaScript?
+### What is event loop in JavaScript?
+
 The event loop is a core mechanism in JavaScript that enables its single-threaded nature to handle asynchronous operations without blocking the main execution thread. It orchestrates the execution flow by continuously checking if the call stack is empty and moving tasks from the queues into the call stack to be run.
 
 This is essential for web browsers and Node.js because long-running tasks, such as fetching data from a server or waiting on a timer, would otherwise freeze the entire application. The event loop ensures responsiveness by allowing JavaScript to offload these tasks and return to them later.
