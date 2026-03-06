@@ -9,7 +9,7 @@
     <meta name="description" content="{{ settings.description }}"/>
     <meta name="author" content="{{ settings.author }}"/>
     <title>{{ settings.title }}</title>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | bust }}">
   </head>
   <body>
     <div class="container min-w-80 mx-auto">
@@ -41,6 +41,6 @@
       </footer>
     </div>
 
-    <script src="/assets/js/script.js"></script>
+    <script src="{{ '/assets/js/script.js' | bust }}"></script>
   </body>
 </html>
