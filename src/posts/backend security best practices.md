@@ -6,9 +6,9 @@ layout: layouts/blog_layout.njk
 
 APIs are the nervous system of modern software. They connect your frontend to your backend, your services to each other, and your platform to the outside world. They're also one of the most targeted attack surfaces in existence.
 
-In 2025, the OWASP API Security Top 10 remained the go-to reference for API vulnerabilities — and the same categories keep appearing in breach reports year after year. Not because developers are careless, but because API security is genuinely nuanced and easy to get wrong under shipping pressure.
+In 2025, the OWASP API Security Top 10 remained the go-to reference for API vulnerabilities; and the same categories keep appearing in breach reports year after year. Not because developers are careless, but because API security is genuinely nuanced and easy to get wrong under shipping pressure.
 
-This guide is a practical, opinionated reference for building APIs that are secure by default — not bolted on as an afterthought.
+This guide is a practical, opinionated reference for building APIs that are secure by default; not bolted on as an afterthought.
 
 ---
 
@@ -22,10 +22,10 @@ Authentication is the first line of defense. If you can't verify who's making a 
 
 - Always verify the signature. Never accept `alg: none`.
 - Use short expiry times (15–60 minutes for access tokens).
-- Store refresh tokens securely — `HttpOnly`, `Secure`, `SameSite=Strict` cookies.
+- Store refresh tokens securely; `HttpOnly`, `Secure`, `SameSite=Strict` cookies.
 - Validate the `iss`, `aud`, and `exp` claims on every request.
 
-**OAuth 2.0 + OIDC** is the right choice for delegated authorization. Don't roll your own OAuth flows — use a battle-tested provider (Auth0, Keycloak, Okta, Supabase Auth).
+**OAuth 2.0 + OIDC** is the right choice for delegated authorization. Don't roll your own OAuth flows; use a battle-tested provider (Auth0, Keycloak, Okta, Supabase Auth).
 
 ### API Keys for machine-to-machine
 
@@ -41,7 +41,7 @@ API-Key: sk_live_abc123...
 - Hash API keys before storing them (treat them like passwords).
 - Scope keys to minimum required permissions.
 - Build rotation and revocation into your platform from day one.
-- Never log API keys — even partially.
+- Never log API keys; even partially.
 
 ---
 
@@ -61,19 +61,19 @@ This is the most common API vulnerability in the wild. It looks like this:
 
 ```
 GET /api/invoices/1042   ← User A's invoice
-GET /api/invoices/1043   ← User B's invoice — can User A access this?
+GET /api/invoices/1043   ← User B's invoice; can User A access this?
 ```
 
 **Always check ownership, not just authentication:**
 
 ```javascript
-// ❌ Wrong — only checks if user is logged in
+// ❌ Wrong; only checks if user is logged in
 app.get("/invoices/:id", authenticate, async (req, res) => {
   const invoice = await Invoice.findById(req.params.id);
   res.json(invoice);
 });
 
-// ✅ Correct — checks ownership too
+// ✅ Correct; checks ownership too
 app.get("/invoices/:id", authenticate, async (req, res) => {
   const invoice = await Invoice.findOne({
     _id: req.params.id,
@@ -86,7 +86,7 @@ app.get("/invoices/:id", authenticate, async (req, res) => {
 
 ### Principle of Least Privilege
 
-Every user, service, and API key should have the minimum permissions required to do its job — nothing more. Audit your permission grants regularly and prune what's no longer needed.
+Every user, service, and API key should have the minimum permissions required to do its job; nothing more. Audit your permission grants regularly and prune what's no longer needed.
 
 ---
 
@@ -120,7 +120,7 @@ app.post("/users", (req, res) => {
 
 ### Prevent injection attacks
 
-**SQL Injection** — always use parameterized queries or an ORM:
+**SQL Injection**: always use parameterized queries or an ORM:
 
 ```sql
 -- ❌ Never do this
@@ -130,7 +130,7 @@ SELECT * FROM users WHERE email = '${userInput}';
 SELECT * FROM users WHERE email = $1;  -- pass userInput as parameter
 ```
 
-**NoSQL Injection** — sanitize MongoDB operators:
+**NoSQL Injection**: sanitize MongoDB operators:
 
 ```javascript
 // ❌ Vulnerable
@@ -141,7 +141,7 @@ const email = z.string().email().parse(req.body.email);
 User.findOne({ email });
 ```
 
-**Command Injection** — avoid `exec()`, `eval()`, and shell commands with user input entirely.
+**Command Injection**: avoid `exec()`, `eval()`, and shell commands with user input entirely.
 
 ---
 
@@ -179,16 +179,16 @@ res.json({
   name: user.name,
   email: user.email,
   createdAt: user.createdAt,
-  // password_hash, mfaSecret, internalFlags — never returned
+  // password_hash, mfaSecret, internalFlags: never returned
 });
 ```
 
 ### Encrypt sensitive data at rest and in transit
 
-- **TLS everywhere** — no HTTP, no exceptions. Use TLS 1.2 minimum, prefer TLS 1.3.
+- **TLS everywhere**: no HTTP, no exceptions. Use TLS 1.2 minimum, prefer TLS 1.3.
 - **Encrypt PII and secrets at rest** using AES-256.
 - **Hash passwords** with bcrypt, scrypt, or Argon2. Never MD5 or SHA-1.
-- **Rotate secrets** — database credentials, API keys, signing secrets — on a regular schedule.
+- **Rotate secrets**: database credentials, API keys, signing secrets; on a regular schedule.
 
 ---
 
@@ -250,7 +250,7 @@ Permissions-Policy: geolocation=(), camera=()
 ### Configure CORS properly
 
 ```javascript
-// ❌ Dangerous — allows any origin
+// ❌ Dangerous; allows any origin
 app.use(cors({ origin: "*" }));
 
 // ✅ Explicit allowlist
@@ -324,7 +324,7 @@ safety check
 
 - Pin dependency versions in production. Floating versions (`^1.2.3`) can pull in a compromised patch.
 - Enable **Dependabot** or **Renovate** to automate security updates.
-- Vet new dependencies before adding them — check download counts, maintainer activity, and known CVEs.
+- Vet new dependencies before adding them; check download counts, maintainer activity, and known CVEs.
 
 ### Use a Software Bill of Materials (SBOM)
 
@@ -339,7 +339,7 @@ Hardcoded secrets are one of the most common causes of breaches, and they're ent
 ### The golden rule: secrets never belong in code
 
 ```bash
-# ❌ Hardcoded — will end up in git history forever
+# ❌ Hardcoded; will end up in git history forever
 DATABASE_URL = "postgres://admin:supersecret@prod-db:5432/app"
 
 # ✅ From environment / secrets manager
@@ -348,10 +348,10 @@ DATABASE_URL = os.environ["DATABASE_URL"]
 
 ### Use a dedicated secrets manager
 
-- **HashiCorp Vault** — self-hosted, powerful
-- **AWS Secrets Manager / Parameter Store** — great for AWS-native stacks
-- **GCP Secret Manager / Azure Key Vault** — cloud-native alternatives
-- **Doppler / Infisical** — developer-friendly, cloud-agnostic
+- **HashiCorp Vault**; self-hosted, powerful
+- **AWS Secrets Manager / Parameter Store**; great for AWS-native stacks
+- **GCP Secret Manager / Azure Key Vault**; cloud-native alternatives
+- **Doppler / Infisical**; developer-friendly, cloud-agnostic
 
 ### Rotate secrets automatically
 
@@ -382,8 +382,8 @@ Security controls are only valuable if they actually work.
 
 ### Test your own endpoints
 
-- **OWASP ZAP** — automated DAST (Dynamic Application Security Testing)
-- **Burp Suite** — manual API security testing
+- **OWASP ZAP**; automated DAST (Dynamic Application Security Testing)
+- **Burp Suite**; manual API security testing
 - Write **security-focused unit tests** for your auth and authorization logic
 - Conduct or commission **penetration tests** at least annually for production APIs
 
@@ -425,8 +425,8 @@ Before shipping any API to production, run through this checklist:
 
 ## The Bottom Line
 
-API security isn't a feature you add at the end of a sprint — it's a discipline woven into every layer of your system. The good news is that most attacks exploit known, preventable vulnerabilities. You don't need to be a security expert to dramatically reduce your attack surface; you just need to be consistent.
+API security isn't a feature you add at the end of a sprint; it's a discipline woven into every layer of your system. The good news is that most attacks exploit known, preventable vulnerabilities. You don't need to be a security expert to dramatically reduce your attack surface; you just need to be consistent.
 
-Validate everything. Authorize every access. Expose as little as possible. Log everything meaningful. And test your assumptions — because security controls that haven't been verified might as well not exist.
+Validate everything. Authorize every access. Expose as little as possible. Log everything meaningful. And test your assumptions; because security controls that haven't been verified might as well not exist.
 
 > _The goal isn't a perfectly unhackable API. The goal is to make attacking your API more expensive than it's worth._
