@@ -174,5 +174,3 @@ Only shard when you truly need to. Exhaust caching, read replicas, and connectio
 **Measure before you optimize.** Know whether you're read-heavy or write-heavy. The right scaling strategy depends on the answer.
 
 **Sharding is a last resort.** It solves real problems at massive scale, but introduces enough complexity that it should only be reached when all other options have been exhausted.
-
----

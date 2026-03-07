@@ -1,5 +1,6 @@
 import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import tailwindcss from "@tailwindcss/vite";
+import htmlminifier from "html-minifier-terser";
 import fs from "fs";
 
 export default function (eleventyConfig) {
@@ -7,6 +8,19 @@ export default function (eleventyConfig) {
     const stat = fs.statSync(`./_site${url}`);
     const mtime = stat.mtimeMs;
     return `${url}?v=${mtime}`;
+  });
+
+  eleventyConfig.addTransform("htmlmin", function (content) {
+    if ((this.page.outputPath || "").endsWith(".html")) {
+      return htmlminifier.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+      });
+    }
+    return content;
   });
 
   eleventyConfig.addPassthroughCopy("src/assets");
