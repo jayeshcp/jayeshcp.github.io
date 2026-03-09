@@ -34,7 +34,7 @@ jobs:
       - name: Build
         env:
           NODE_ENV: "prod"
-          GTAG: ${{ vars.GTAG }}
+          GTAG: ${{ secrets.GTAG }}
         run: npm run build
 
       - name: Setup Pages

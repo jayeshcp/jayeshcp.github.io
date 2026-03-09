@@ -53,11 +53,7 @@
       <script src="{{ '/assets/js/script.js' }}"></script>
     {% endif %}
 
-    <h2>Debug Info</h2>
-    <pre>{{ env | dump }}</pre>
-
     {% if env.GTAG and env.isProd %}
-      <input type="hidden" id="gtag-id" value="{{ env.GTAG }}">
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ env.GTAG }}"></script>
       <script>
