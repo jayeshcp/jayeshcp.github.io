@@ -43,5 +43,18 @@
     </div>
 
     <script src="{{ '/assets/js/script.js' | bust }}"></script>
+    {% if env.gtag and env.isProd %}
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ env.gtag }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', '{{ env.gtag }}');
+      </script>
+    {% endif %}
   </body>
 </html>

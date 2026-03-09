@@ -4,24 +4,28 @@ import htmlminifier from "html-minifier-terser";
 import fs from "fs";
 
 export default function (eleventyConfig) {
-  eleventyConfig.addFilter("bust", (url) => {
-    const stat = fs.statSync(`./_site${url}`);
-    const mtime = stat.mtimeMs;
-    return `${url}?v=${mtime}`;
-  });
+  const isProd = process.env.NODE_ENV === "prod";
 
-  eleventyConfig.addTransform("htmlmin", function (content) {
-    if ((this.page.outputPath || "").endsWith(".html")) {
-      return htmlminifier.minify(content, {
-        useShortDoctype: true,
-        removeComments: true,
-        collapseWhitespace: true,
-        minifyCSS: true,
-        minifyJS: true,
-      });
-    }
-    return content;
-  });
+  if (isProd) {
+    eleventyConfig.addTransform("htmlmin", function (content) {
+      if ((this.page.outputPath || "").endsWith(".html")) {
+        return htmlminifier.minify(content, {
+          useShortDoctype: true,
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+        });
+      }
+      return content;
+    });
+
+    eleventyConfig.addFilter("bust", (url) => {
+      const stat = fs.statSync(`./_site${url}`);
+      const mtime = stat.mtimeMs;
+      return `${url}?v=${mtime}`;
+    });
+  }
 
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPlugin(EleventyVitePlugin, {
