@@ -32,7 +32,7 @@ jobs:
       - name: Build
         env:
           NODE_ENV: "prod"
-          gtag: ${{ vars.GTAG }}
+          GTAG: ${{ vars.GTAG }}
         run: npm run build
 
       - name: Setup Pages
