@@ -2,6 +2,7 @@ import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import tailwindcss from "@tailwindcss/vite";
 import htmlminifier from "html-minifier-terser";
 import fs from "fs";
+import "dotenv/config";
 
 export default function (eleventyConfig) {
   const isProd = process.env.NODE_ENV === "prod";
