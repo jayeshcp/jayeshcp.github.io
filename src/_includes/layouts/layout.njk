@@ -10,7 +10,12 @@
     <meta name="author" content="{{ settings.author }}"/>
     <link rel="icon" href="{{ '/assets/images/favicon.png' | url }}"/>
     <title>{{ settings.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | bust }}">
+    {% if env.isProd %}
+      <link rel="stylesheet" href="{{ '/assets/css/style.css' | bust }}">
+    {% else %}
+      <link rel="stylesheet" href="{{ '/assets/css/style.css' }}">
+    {% endif %}
+
   </head>
   <body>
     <div class="container min-w-80 mx-auto">
@@ -42,8 +47,17 @@
       </footer>
     </div>
 
-    <script src="{{ '/assets/js/script.js' | bust }}"></script>
+    {% if env.isProd %}
+      <script src="{{ '/assets/js/script.js' | bust }}"></script>
+    {% else %}
+      <script src="{{ '/assets/js/script.js' }}"></script>
+    {% endif %}
+
+    <h2>Debug Info</h2>
+    <pre>{{ env | dump }}</pre>
+
     {% if env.gtag and env.isProd %}
+      <input type="hidden" id="gtag-id" value="{{ env.gtag }}">
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ env.gtag }}"></script>
       <script>
