@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          gtag: ${{ vars.gtag }}
+          gtag: ${{ vars.GTAG }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
