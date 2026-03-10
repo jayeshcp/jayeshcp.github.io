@@ -12,5 +12,6 @@ title: About me
 > way of facilitating and improving communication between people and
 > understand that people come before technology.
 
-If you want to get in touch, feel free to reach out to me on <a href="{{ settings.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="{{ settings.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>. I am always happy to connect with other software engineers and share
-ideas and knowledge.
+If you want to get in touch, feel free to reach out to me using following links. I am always happy to connect with other software engineers, recruiters/hiring managers, business partners.
+
+{% include './components/social_buttons.njk' %}
