@@ -2,6 +2,10 @@
 layout: layouts/layout.njk
 ---
 
+## Presentation Slides
+
+- [Web Accessibility Guidelines](./slides/web%20accessibility%20guidelines/index.html)
+
 ## All posts
 
 > Some of the interesting topics related to software design & development.
